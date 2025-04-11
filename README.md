@@ -42,6 +42,7 @@
 ### 1. Клонируй проект и перейди в папку
 
 git clone git@github.com:TUBE-GULL/API_fastapi_sqlalchemy_Docker_SQLpostgres.git
+
 cd API_fastapi_sqlalchemy_Docker_SQLpostgres
 
 ## 2. 📦 Установка и запуск
