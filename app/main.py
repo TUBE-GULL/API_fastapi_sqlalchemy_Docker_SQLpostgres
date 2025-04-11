@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from alembic.config import Config
+from alembic import command
+
 from app.routers.main_router import root
 from app.database import create_db
 
@@ -10,12 +13,11 @@ async def startup():
     await create_db()
     
     
-# from alembic.config import Config
-# from alembic import command
-# 
-# def run_migrations():
-    # alembic_cfg = Config("alembic.ini")
-    # command.upgrade(alembic_cfg, "head")
-# 
+
+
+def run_migrations():
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
 # Вызывайте при старте приложения
-# run_migrations()
+run_migrations()
