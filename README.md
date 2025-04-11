@@ -39,9 +39,12 @@
 
 </div>
 
+### 1. Клонируй проект и перейди в папку
 
+1. git clone git@github.com:TUBE-GULL/API_fastapi_sqlalchemy_Docker_SQLpostgres.git
+2. cd API_fastapi_sqlalchemy_Docker_SQLpostgres
 
-## 📦 Установка и запуск
+## 2. 📦 Установка и запуск
 docker compose up --build
 
 
@@ -49,11 +52,6 @@ docker compose up --build
 
 docker compose exec api pytest
 
-
-### 1. Клонируй проект и перейди в папку
-
-git clone <repo-url>
-cd MY_API
 
 ## 🌟 О проекте
 ```bash
