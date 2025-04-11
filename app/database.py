@@ -1,4 +1,3 @@
-# from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -15,6 +14,7 @@ engine = create_engine(
     # pool_size=5, #max_connect db 5 
     # pool_overflow=10,# доп connect к db
     )
+
 
 Base = declarative_base()
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -34,22 +34,17 @@ async def create_db():
         print(f"Произошла ошибка: {e}")
 
 
-
 # # Функция для получения сессии
 async def get_db():
-    # try:
-    #     async with Session() as db: # Создаем асинхронную сессию
-    #         yield db # Возвращаем сессию  
-    # except SQLAlchemyError as e:# обработка ошибки в SQLAlchemy 
-    #     print(f"Error receiving session:{e}")
-    # except Exception as e: # Если другие случаи 
-    #     print(f"Error:{e}")
 
-     db = Session()  # Создаём сессию
-     try:
+    db = Session()  # Создаём сессию
+    
+    try:
         yield db  
-     finally:
-        db.close()  # Закрываем сессию после выполнения
+    except SQLAlchemyError as e:
+        print(f"Ошибка при получении сессии: {e}")
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
 
 
 
