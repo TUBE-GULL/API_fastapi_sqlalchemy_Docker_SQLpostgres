@@ -41,8 +41,8 @@
 
 ### 1. Клонируй проект и перейди в папку
 
-[Склонировать репозиторий](git@github.com:TUBE-GULL/API_fastapi_sqlalchemy_Docker_SQLpostgres.git)
-[Склонировать репозиторий](cd API_fastapi_sqlalchemy_Docker_SQLpostgres)
+git clone git@github.com:TUBE-GULL/API_fastapi_sqlalchemy_Docker_SQLpostgres.git
+cd API_fastapi_sqlalchemy_Docker_SQLpostgres
 
 ## 2. 📦 Установка и запуск
 docker compose up --build
