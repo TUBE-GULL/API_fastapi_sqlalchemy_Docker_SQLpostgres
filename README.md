@@ -40,7 +40,7 @@
 </div>
 
 ### 🗃️ Структура проекта
-
+```bash
 my_api_project/
 ├── app/
 │   ├── main.py             # Точка входа
@@ -82,4 +82,4 @@ docker compose exec api pytest
 
 ```bash
 git clone <repo-url>
-cd my_api_project
+cd MY_API
