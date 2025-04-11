@@ -8,3 +8,14 @@ app.include_router(root)# Подключаем главный роутер (та
 @app.on_event("startup")
 async def startup():
     await create_db()
+    
+    
+# from alembic.config import Config
+# from alembic import command
+# 
+# def run_migrations():
+    # alembic_cfg = Config("alembic.ini")
+    # command.upgrade(alembic_cfg, "head")
+# 
+# Вызывайте при старте приложения
+# run_migrations()

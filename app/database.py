@@ -4,7 +4,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from app.config import settings
-from pydantic import BaseModel
 
 # строка подключения 
 DB_URL = settings.DATABASE_URL_psycopg
@@ -51,3 +50,6 @@ async def get_db():
         yield db  
      finally:
         db.close()  # Закрываем сессию после выполнения
+
+
+
