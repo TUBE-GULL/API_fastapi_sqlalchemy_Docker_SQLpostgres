@@ -71,7 +71,7 @@ router_create_reservation = APIRouter()
         }
     }
 )
-async def create_reservation(reservation: schemas.ReservationCreate, db: Session = Depends(get_db)) -> schemas.ReservationRead:
+async def create_reservation(reservation: schemas.ReservationCreate, db: Session = Depends(get_db)):
     """
     Создает новое бронирование столика с полной валидацией.
     
@@ -167,78 +167,3 @@ async def create_reservation(reservation: schemas.ReservationCreate, db: Session
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Неожиданная ошибка: {str(e)}"
         )
-
-
-
-# @router_create_reservation.post('/',
-#                    description="Создать новую бронь столика",
-#                    response_model=schemas.ReservationRead)
-# async def create_reservation(reservation: schemas.ReservationCreate, db: Session = Depends(get_db)):
-#     """
-#     Создаёт новую бронь столика на основе входных данных.
-#     """
-#     # Проверка существования столика
-#     table = db.query(Table).filter(Table.id == reservation.table_id).first()
-#     if not table:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST, 
-#             detail="Столик не найден"
-#         )
-    
-#     # Обработка времени бронирования
-#     try:
-#         # Приводим время к UTC и делаем timezone-aware
-#         if isinstance(reservation.reservation_time, datetime):
-#             if reservation.reservation_time.tzinfo is None:
-#                 start_new = reservation.reservation_time.replace(tzinfo=timezone.utc)
-#             else:
-#                 start_new = reservation.reservation_time.astimezone(timezone.utc)
-#         else:
-#             start_new = datetime.fromisoformat(reservation.reservation_time.replace("Z", "+00:00"))
-#             if start_new.tzinfo is None:
-#                 start_new = start_new.replace(tzinfo=timezone.utc)
-#     except (AttributeError, ValueError) as e:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail=f"Неверный формат времени бронирования: {str(e)}"
-#         )
-    
-#     end_new = start_new + timedelta(minutes=reservation.duration_minutes)
-    
-#     # Получаем все бронирования для этого столика
-#     existing_reservations = db.query(Reservation).filter(
-#         Reservation.table_id == reservation.table_id
-#     ).all()
-    
-#     # Проверяем пересечения с существующими бронями
-#     for existing in existing_reservations:
-#         # Приводим время существующей брони к UTC
-#         start_existing = existing.reservation_time
-#         if start_existing.tzinfo is None:
-#             start_existing = start_existing.replace(tzinfo=timezone.utc)
-#         else:
-#             start_existing = start_existing.astimezone(timezone.utc)
-        
-#         end_existing = start_existing + timedelta(minutes=existing.duration_minutes)
-        
-#         # Проверяем пересечение временных интервалов
-#         if (start_new < end_existing) and (end_new > start_existing):
-#             raise HTTPException(
-#                 status_code=status.HTTP_409_CONFLICT,
-#                 detail=f"Столик уже забронирован с {start_existing} до {end_existing}"
-#             )
-    
-#     # Создаем новую бронь (сохраняем как timezone-naive в БД)
-#     new_reservation = Reservation(
-#         customer_name=reservation.customer_name,
-#         table_id=reservation.table_id,
-#         reservation_time=start_new.replace(tzinfo=None),  # Убираем временную зону для хранения
-#         duration_minutes=reservation.duration_minutes
-#     )
-    
-#     db.add(new_reservation)
-#     db.commit()
-#     db.refresh(new_reservation)
-#     return new_reservation
-
-

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Path, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -44,10 +44,7 @@ router_delete_reservation = APIRouter()
         }
     }
 )
-async def delete_reservation(
-    reservation_id: int = Path(..., description="ID бронирования для удаления", gt=0),
-    db: Session = Depends(get_db)
-) -> dict:
+async def delete_reservation(reservation_id: int,  db: Session = Depends(get_db)):
     """
     Удаляет бронирование столика по его уникальному идентификатору.
     

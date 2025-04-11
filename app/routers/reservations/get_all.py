@@ -49,9 +49,7 @@ router_get_all_reservations = APIRouter()
     }
 )
 
-async def get_all_reservations(
-    db: Session = Depends(get_db)
-) -> list[schemas.ReservationRead]:
+async def get_all_reservations(db: Session = Depends(get_db)):
     """
     Получает список всех активных бронирований из системы.
     
@@ -74,20 +72,3 @@ async def get_all_reservations(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Ошибка при получении списка бронирований: {str(e)}"
         )
-
-
-# @router_get_all_reservations.get('/',
-#                   description="Получить список всех броней",
-#                   response_model=list[schemas.ReservationRead])
-# async def get_all_reservations(db:Session = Depends(get_db)):
-#     """
-#     Возвращает список всех броней в ресторане.
-
-#     Параметры:
-#     - db (Session): Сессия подключения к базе данных.
-    
-#     Возвращает:
-#     - Список объектов броней (schemas.ReservationRead).
-#     """
-    
-#     return db.query(Reservation).all()
