@@ -111,11 +111,3 @@ my_api_project/
 ├── requirements.txt        # Зависимости
 └── README.md               # Документация проекта
 ```
-
-### ⚙️ Переменные окружения
-DB_HOST=db
-DB_PORT=5432
-DB_NAME=postgres
-DB_USER=postgres
-DB_PASSWORD=password
-
