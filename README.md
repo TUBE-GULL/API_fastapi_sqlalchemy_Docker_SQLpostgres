@@ -47,8 +47,9 @@ cd API_fastapi_sqlalchemy_Docker_SQLpostgres
 ```
 
 ## 2. 📦 Установка и запуск
+```bash
 docker compose up --build
-
+```
 
 ### Тестирование
 
@@ -90,7 +91,7 @@ docker compose exec api pytest (пока в работе)
 
 
 ### 🗃️ Структура проекта
-
+```bash
 my_api_project/
 ├── app/
 │   ├── main.py             # Точка входа
